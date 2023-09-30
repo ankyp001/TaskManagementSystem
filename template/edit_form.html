@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Your Task</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item active">Add Task</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row justify-content-center">
+
+        <!-- Left side columns -->
+        <div class="col-lg-9">
+          <div class="row ">
+            <!-- Recent Sales -->
+            <!-- <div class="col-18"> -->
+          <div class="card recent-sales overflow-auto">
+					<h3 class="p-5 pb-4 pt-5 text-center">Update Task</h3>
+					<form class="row g-3 needs-validation p-5 pt-0 justify-content-center" novalidate  action="/editTaskTo/{{upData.id}}" method="post">
+						{% csrf_token %}
+						
+						<input type="hidden" name="user_id" value="{{user}}">
+
+						<div class="col-md-10 position-relative " hidden>
+					    <label for="validationTooltip04" class="form-label">Name</label>
+					    <input name="name" type="text" class="form-control" value="{{fname}}" id="validationTooltip01" placeholder="Enter task "  required>
+					  	</div>
+
+					   <div class="col-md-5 position-relative">
+					    <label for="validationTooltip02" class="form-label">Company Name</label>
+					    <select class="form-select" name="company" id="validationTooltip02" required="">
+					      <option value="">Select</option>
+					      <option  {% if upData.comp_Name == "Muster Dekho" %} selected {% endif %}>Muster Dekho</option>
+						  <option  {% if upData.comp_Name == "companie1" %} selected {% endif %}>companie1</option>
+					      <option  {% if upData.comp_Name == "companie2" %} selected {% endif %}>companie2</option>
+					      <option  {% if upData.comp_Name == "companie3" %} selected {% endif %}>companie3</option>
+					      <option  {% if upData.comp_Name == "companie4" %} selected {% endif %}>companie4</option>
+					      <option  {% if upData.comp_Name == "companie5" %} selected {% endif %}>companie5</option>
+					      <option  {% if upData.comp_Name == "companie6" %} selected {% endif %}>companie6</option>
+					      <option  {% if upData.comp_Name == "companie7" %} selected {% endif %}>companie7</option>
+					      <option  {% if upData.comp_Name == "Others" %} selected {% endif %}>Others</option>
+					      
+					    </select>
+					  </div>
+
+					  <div class="col-md-5 position-relative">
+					    <label for="validationTooltip03" class="form-label">Task name</label>
+					    <input name="task" type="text" value="{{upData.task_Name}}" class="form-control" id="validationTooltip03" placeholder="Enter task " required>             
+					  </div>
+
+					  <div class="col-md-10 position-relative" id="description" >
+						<label for="allocation_date" class="form-label">Description</label>
+						{% comment %} <input name="description" type="" value=""   class="form-control" id="allocation_date" placeholder="Enter task " readonly> {% endcomment %}
+						<textarea name='description' id='001' class='form-control'  placeholder="description ">{{upData.task_Desc}}</textarea>
+					  </div>
+
+					   <div class="col-md-5 position-relative">
+					    <label for="validationTooltip04" class="form-label">Status</label>
+					    <select class="form-select" name="work_status" id="status" required="">
+					      <option value="">Select</option>
+					      <option {% if upData.status == "Pending" %} selected {% endif %} >Pending</option>
+					      <option {% if upData.status == "In-progress" %} selected {% endif %}>In-progress</option>
+					      <option {% if upData.status == "Completed" %} selected {% endif %}>Completed</option>
+					    </select>
+					  </div>
+
+					  <div class="col-md-5 position-relative" id="date" >
+					    <label for="allocation_date" class="form-label">Task Created On</label>
+					    <input name="allocation_date" value="{{upData.task_Create|date:'Y-m-d'}}"  type="date" class="form-control" id="allocation_date" placeholder="Enter task " readonly>
+					  </div>
+					  	
+					  	{% if upData.status == "In-progress" %}
+							<div class="col-md-5 position-relative " id="start_date">
+								<label for="validationTooltip05" class="form-label">Start Date</label>
+								<input name="start_date" id="start_date1" value="{{upData.start_Date|date:'Y-m-d'}}"  type="date" class="form-control"  placeholder="Enter task">
+							</div>
+						
+						{% elif upData.status == "Pending" %}
+							<div class="col-md-5 position-relative " id="start_date">
+								<label for="validationTooltip05" class="form-label">Start Date</label>
+								<input name="start_date" id="start_date1" value="{{upData.start_Date|date:'Y-m-d'}}"  type="date" class="form-control"  placeholder="Enter task">
+							</div>
+						
+
+						{% elif upData.status == "Completed" %}
+							<div class="col-md-5 position-relative " id="start_date">
+								<label for="validationTooltip05" class="form-label">Start Date</label>
+								<input name="start_date" id="start_date1" value="{{upData.start_Date|date:'Y-m-d'}}"  type="date" class="form-control"  placeholder="Enter task" >
+							</div>
+						{% endif %}
+
+
+						<div class="col-md-5 position-relative " id="start_time">
+							<label for="validationTooltip06" class="form-label">Start Time</label>
+							<!-- <input name="end_date" type="date" class="form-control"  placeholder="Enter task " =""> -->
+							<input type="time" name="start_time" id="start_time1" value="{{upData.start_Time|time:'H:i'}}" class="form-control" required/>
+						</div>
+
+					   <div class="col-md-5 position-relative " id="end_date">
+					    <label for="validationTooltip07" class="form-label">End Date</label>
+					    <input name="end_date"  type="date" id="end_date1" value="{{upData.end_Date|date:'Y-m-d'}}" class="form-control" id="validationTooltip07" >
+					  </div>
+
+					  <div class="col-md-5 position-relative " id="end_time">
+					    <label for="validationTooltip08" class="form-label">End Time</label>
+					    <!-- <input name="end_date" type="date" class="form-control"  placeholder="Enter task " =""> -->
+               			<input type="time" name="end_time" id="end_time1" value="{{upData.end_Time|time:'H:i'}}" class="form-control"  required/>
+					  </div>
+
+            <!--  <div class="col-md-5 position-relative">
+              <label for="validationTooltip05" class="form-label">End Time</label>
+               <input type="time" name="end_time" class="form-control" value="10:05 AM" />
+            </div>
+ -->
+					   <!-- <div class="col-md-5 position-relative">
+					    <label for="validationTooltip06" class="form-label">Status</label>
+					    <select class="form-select" name="work" id="validationTooltip06" ="">
+					      <option value="pending">Pending</option>
+					      <option value="in-progress">In-progress</option>
+					      <option value="completed">Completed</option>
+					    </select>
+					  </div> -->
+					  <div class="col-md-5"> </div>
+ 						
+ 						<div class="col-md-9"> </div>
+ 
+
+					  <div class="col-md-3">
+					   <button type="submit" class="btn btn-success shadow-sm mr-2 my-1 submit_article blog">Update</button>
+					  </div>
+						</form>
+
+              </div>
+            <!-- </div> -->
+            <!-- End Recent Sales -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+<script>
+	
+	$(document).ready(function(){
+		 	$("#start_date").hide();
+      $("#start_time").hide();
+      $("#end_date").hide();
+      $("#end_time").hide();
+      $("#date").hide();
+      $("#start_date1").prop( "disabled", true );
+      $("#start_time1").prop( "disabled", true );
+      $("#end_date1").prop( "disabled", true );
+      $("#end_time1").prop( "disabled", true );
+      $("#date1").prop( "disabled", true );
+
+      var status = $("#status").val();
+      // console.log(status);
+
+      if(status == 'In-progress'){
+      	$("#start_date").show();
+	      $("#start_time").show();
+	      $("#date").show();
+	      $("#end_date").hide();
+  			$("#end_time").hide();
+  			$("#start_date1").prop( "disabled", false );
+    		$("#start_time1").prop( "disabled", false );
+      	$("#end_date1").prop( "disabled", true );
+        $("#end_time1").prop( "disabled", true );
+      }
+      else if(status == 'Completed')
+      {
+      	$("#start_date").show();
+        $("#start_time").show();
+        $("#end_date").show();
+        $("#end_time").show();
+        $("#date").show();
+        $("#start_date1").prop( "disabled", false );
+    		$("#start_time1").prop( "disabled", false );
+        $("#end_date1").prop( "disabled", false );
+        $("#end_time1").prop( "disabled", false );
+      }
+      else if(status == 'Pending')
+      {
+      	$("#date").show();
+      	$("#start_date").prop( "disabled", true );
+			        $("#start_time").prop( "disabled", true );
+			        $("#end_date").prop( "disabled", true );
+			        $("#end_time").prop( "disabled", true );
+			        $("#date").prop( "disabled", true );
+      }
+
+    // $('#status').on('change', function() {
+
+    // 	var status = $("#status").val();
+    // 	console.log(status);
+
+    //   if (status == 'Pending'){
+    //   	$("#date").show();
+    //   	$("#start_date").hide();
+	  //     $("#start_time").hide();
+	  //     $("#end_date").hide();
+  	// 		$("#end_time").hide();
+    //   }
+
+    //   else{
+		//       if (status == 'In-progress')   
+		//       {
+		//       	$("#start_date").show();
+		// 	      $("#start_time").show();
+		// 	      $("#date").show();
+		// 	      $("#end_date").hide();
+    //   			$("#end_time").hide();
+		//       }
+		//       else{
+
+		//       	if (status == 'Completed')   
+		//      		{
+		//      		  $("#start_date").show();
+		// 	        $("#start_time").show();
+		// 	        $("#end_date").show();
+		// 	        $("#end_time").show();
+		// 	        $("#date").show();
+		//       	}
+			      
+		    
+		// 	   }
+		// 	}
+
+    // });
+
+      $('#status').on('change', function() {
+      if (this.value == 'Pending'){
+      	$("#date").show();
+      	$("#start_date").hide();
+        	$("#start_time").hide();
+         $("#end_date").hide();
+        	$("#end_time").hide();
+        	$("#start_date1").prop( "disabled", true );
+			    $("#start_time1").prop( "disabled", true );
+			    $("#end_date1").prop( "disabled", true );
+			    $("#end_time1").prop( "disabled", true );
+      }
+      else{
+		      if (this.value == 'In-progress')   
+		      {
+		      	$("#start_date").show();
+		        	$("#start_time").show();
+		        	$("#date").show();
+		        	$("#end_date").hide();
+		        	$("#end_time").hide();
+		        	$("#start_date1").prop( "disabled", false );
+			    		$("#start_time1").prop( "disabled", false );
+		        	$("#end_date1").prop( "disabled", true );
+			        $("#end_time1").prop( "disabled", true );
+		      }
+		      else{
+
+		      	if (this.value == 'Completed')   
+		     		{
+		     		  $("#start_date").show();
+			        $("#start_time").show();
+			        $("#end_date").show();
+			        $("#end_time").show();
+			        $("#date").show();
+			        $("#start_date1").prop( "disabled", false );
+			    		$("#start_time1").prop( "disabled", false );
+			        $("#end_date1").prop( "disabled", false );
+			        $("#end_time1").prop( "disabled", false );
+		      	}
+			      else
+			      {
+			      	$("#start_date").hide();
+			        $("#start_time").hide();
+			        $("#end_date").hide();
+			        $("#end_time").hide();
+			        $("#date").hide();
+			        $("#start_date").prop( "disabled", true );
+			        $("#start_time").prop( "disabled", true );
+			        $("#end_date").prop( "disabled", true );
+			        $("#end_time").prop( "disabled", true );
+			        $("#date").prop( "disabled", true );
+			      }
+		    
+			   }
+	}
+
+    });
+});
+</script>
+
+{% endblock  %}

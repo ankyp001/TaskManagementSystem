@@ -1,0 +1,271 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Your Task</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item active">Add Task</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row justify-content-center">
+
+        <!-- Left side columns -->
+        <div class="col-lg-9">
+          <div class="row ">
+            <!-- Recent Sales -->
+            <!-- <div class="col-18"> -->
+          <div class="card recent-sales overflow-auto">
+					<h3 class="p-5 pb-4 pt-5 text-center">Add Task</h3>
+					<form class="row g-3 needs-validation p-5 pt-0 justify-content-center" novalidate  action="" method="post">
+						{% csrf_token %}
+						<div class="col-md-10 position-relative " hidden>
+							<label for="validationTooltip04" class="form-label">Name</label>
+							<input name="name" type="text" class="form-control" value="{{user}}" id="validationTooltip01" placeholder="Enter task "  required>
+					  	</div>
+
+					   	<div class="col-md-5 position-relative">
+							<label for="validationTooltip02" class="form-label">Company Name</label>
+							<select class="form-select" name="company" id="validationTooltip02" required="">
+								<option value="">Select</option>
+								<option value="Muster Dekho">Muster Dekho</option>
+								<option value="companie1">companie1</option>
+								<option value="companie2">companie2</option>
+								<option value="companie3">companie3</option>
+								<option value="companie4">companie4</option>
+								<option value="companie5">companie5</option>
+								<option value="companie6">companie6</option>
+								<option value="companie7">companie7</option>
+								<option value="Others">Others</option>
+					    	</select>
+					  	</div>
+
+						<div class="col-md-5 position-relative">
+							<label for="validationTooltip03" class="form-label">Task name</label>
+							<input name="task" type="text" class="form-control" id="validationTooltip03" placeholder="Enter task " required>             
+						</div>
+
+						<div class="col-md-10 position-relative" id="description" >
+							<label for="allocation_date" class="form-label">Description</label>
+							{% comment %} <input name="description" type="" value=""   class="form-control" id="allocation_date" placeholder="Enter task " readonly> {% endcomment %}
+							<textarea name='description' id='001' class='form-control'  placeholder="description "></textarea>
+						</div>
+
+
+					   	<div class="col-md-10 position-relative">
+					    	<label for="validationTooltip04" class="form-label">Status</label>
+							<select class="form-select" name="work_status" id="status" required="">
+								<option value="">Select</option>
+								<option value="Pending" >Pending</option>
+								<option value="In-progress">In-progress</option>
+								<option value="Completed">Completed</option>
+							</select>
+					  	</div>
+
+						
+						<div class="col-md-10 position-relative" id="date" >
+							<label for="allocation_date" class="form-label">Task Created On</label>
+							<input name="allocation_date" type="date" value=""   class="form-control" id="allocation_date" placeholder="dd-mm-yyyy " readonly>
+						</div>
+
+					    <div class="col-md-5 position-relative " id="start_date">
+					    <label for="validationTooltip05" class="form-label">Start Date</label>
+					    <input name="start_date" id="start_date1" value=""  type="date" class="form-control"  placeholder="dd-mm-yyyy ">
+					  </div>
+
+					  <div class="col-md-5 position-relative " id="start_time">
+					    <label for="validationTooltip06" class="form-label">Start Time</label>
+					    <!-- <input name="end_date" type="date" class="form-control"  placeholder="Enter task " =""> -->
+						<input type="time" name="start_time" id="start_time1" value="" 	class="form-control"  required/>
+					  </div>
+
+					  <!-- // -->
+
+					   <div class="col-md-5 position-relative " id="end_date">
+					    <label for="validationTooltip07" class="form-label">End Date</label>
+					    <input name="end_date" id="end_date1" type="date" value="" class="form-control" id="validationTooltip07" placeholder="Enter task " >
+					  </div>
+
+					  <div class="col-md-5 position-relative " id="end_time">
+					    <label for="validationTooltip08" class="form-label">End Time</label>
+					    <!-- <input name="end_date" type="date" class="form-control"  placeholder="Enter task " =""> -->
+              			 <input type="time" name="end_time" id="end_time1"  class="form-control" required />
+					  </div>
+
+            <!--  <div class="col-md-5 position-relative">
+              <label for="validationTooltip05" class="form-label">End Time</label>
+               <input type="time" name="end_time" class="form-control" value="10:05 AM" />
+            </div>
+ -->
+					   <!-- <div class="col-md-5 position-relative">
+					    <label for="validationTooltip06" class="form-label">Status</label>
+					    <select class="form-select" name="work" id="validationTooltip06" ="">
+					      <option value="pending">Pending</option>
+					      <option value="In-progress">In-progress</option>
+					      <option value="completed">Completed</option>
+					    </select>
+					  </div> -->
+					  <div class="col-md-5"> </div>
+ 						
+ 						<div class="col-md-9"> </div>
+ 
+
+					  <div class="col-md-3">
+					    <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
+              			<input type="submit" name="submit" class="btn btn-primary" >
+					  </div>
+						</form>
+
+              </div>
+            <!-- </div> -->
+            <!-- End Recent Sales -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+<script>
+
+	
+	$(document).ready(function(){
+		$("#start_date").hide();
+    	$("#start_time").hide();
+    	$("#end_date").hide();
+   	    $("#end_time").hide();
+        $("#date").hide();
+
+    $('#status').on('change', function() {
+      if (this.value == 'Pending'){
+		// Current Date 
+		var ele = document.getElementById('allocation_date');
+		let today = new Date();
+		let dd = today.getDate();
+		let mm = today.getMonth() + 1;
+		let yyyy = today.getFullYear();
+		if (dd<10){
+			dd = '0' + dd;
+		}
+		if (mm < 10){
+			mm = '0' + mm;
+		}
+		today = yyyy+'-'+mm+'-'+dd;
+      	ele.setAttribute('value',today);
+
+		$("#date").show();
+      	$("#start_date").hide();
+        $("#start_time").hide();
+        $("#end_date").hide();
+        $("#end_time").hide();
+        $("#date").prop( "disabled", false );
+        $("#start_date1").prop( "disabled", true );
+		$("#start_time").prop( "disabled", true );
+		$("#start_time1").prop( "disabled", true );
+		$("#end_date1").prop( "disabled", true );
+		$("#end_time1").prop( "disabled", true );
+		
+      }
+      else{
+		      if (this.value == 'In-progress')   
+		      {
+				// Current Date 
+				ele = document.getElementById('allocation_date').value;
+				if (ele == ""){
+					var ele = document.getElementById('start_date1');
+					let today = new Date();
+					let hourMinut = today.getHours() + ":" + today.getMinutes();
+					let dd = today.getDate();
+					let mm = today.getMonth() + 1;
+					let yyyy = today.getFullYear();
+					if (dd<10){
+						dd = '0' + dd;
+					}
+					if (mm < 10){
+						mm = '0' + mm;
+					}
+					today = yyyy+'-'+mm+'-'+dd;
+					document.getElementById('allocation_date').value = today;
+					ele.setAttribute('value',today);
+					document.getElementById('start_time1').value = hourMinut;
+				}
+				else {
+
+					var ele = document.getElementById('start_date1');
+					let today = new Date();
+					let hourMinut = today.getHours() + ":" + today.getMinutes();
+					let dd = today.getDate();
+					let mm = today.getMonth() + 1;
+					let yyyy = today.getFullYear();
+					if (dd<10){
+						dd = '0' + dd;
+					}
+					if (mm < 10){
+						mm = '0' + mm;
+					}
+					today = yyyy+'-'+mm+'-'+dd;
+					ele.setAttribute('value',today);
+					document.getElementById('start_time1').value = hourMinut;
+				}
+				
+
+		      	$("#start_date").show();
+				$("#start_time").show();
+				$("#date").show();
+				$("#end_date").hide();
+				$("#end_time").hide();
+				$("#date").prop( "disabled", false );
+				$("#start_date1").prop( "disabled", false );
+				$("#start_time1").prop( "disabled", false );
+				$("#end_date1").prop( "disabled", true );
+				$("#end_time1").prop( "disabled", true );
+		      }
+		      else{
+
+		      	if (this.value == 'Completed')   
+		     		{
+		     		$("#start_date").show();
+			        $("#start_time").show();
+			        $("#end_date").show();
+			        $("#end_time").show();
+			        $("#date").show();
+			        $("#start_date1").prop( "disabled", false );
+			    	$("#start_time1").prop( "disabled", false );
+			        $("#end_date1").prop( "disabled", false );
+			        $("#end_time1").prop( "disabled", false );
+		      	}
+			      else
+			      {
+			      	$("#start_date").hide();
+			        $("#start_time").hide();
+			        $("#end_date").hide();
+			        $("#end_time").hide();
+			        $("#date").hide();
+			        $("#start_date").prop( "disabled", true );
+			        $("#start_time").prop( "disabled", true );
+			        $("#end_date").prop( "disabled", true );
+			        $("#end_time").prop( "disabled", true );
+			        $("#date").prop( "disabled", true );
+			      }
+		    
+			   }
+	}
+
+    });
+});
+</script>
+{% endblock  %}
+
